@@ -42,3 +42,25 @@ if (!process.stdin.isTTY) {
   console.log(`benmertu: ${GITHUB_URL} | ${X_URL}`);
   process.exit(0);
 }
+
+let cleanedUp = false;
+const cleanup = () => {
+  if (cleanedUp) return;
+  cleanedUp = true;
+  process.stdin.setRawMode(false);
+  process.stdin.destroy();
+};
+process.on('exit',   cleanup);
+process.on('SIGINT',  () => { cleanup(); process.exit(0); });
+process.on('SIGTERM', () => { cleanup(); process.exit(0); });
+
+function renderMenu(selected, firstRender) {
+  if (!firstRender) {
+    // Move cursor up N lines to overwrite previous render
+    process.stdout.write(`\x1B[${MENU_ITEMS.length}A`);
+  }
+  MENU_ITEMS.forEach((item, i) => {
+    const prefix = i === selected ? '> ' : '  ';
+    process.stdout.write(`${prefix}${item.label}\n`);
+  });
+}
