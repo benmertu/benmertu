@@ -64,3 +64,39 @@ function renderMenu(selected, firstRender) {
     process.stdout.write(`${prefix}${item.label}\n`);
   });
 }
+
+function main() {
+  process.stdout.write(ASCII_ART + '\n');
+
+  let selected = 0;
+  renderMenu(selected, true);
+
+  readline.emitKeypressEvents(process.stdin);
+  process.stdin.setRawMode(true);
+  process.stdin.resume();
+
+  process.stdin.on('keypress', (_, key) => {
+    if (!key) return;
+
+    if (key.name === 'up') {
+      selected = (selected - 1 + MENU_ITEMS.length) % MENU_ITEMS.length;
+      renderMenu(selected, false);
+    } else if (key.name === 'down') {
+      selected = (selected + 1) % MENU_ITEMS.length;
+      renderMenu(selected, false);
+    } else if (key.name === 'return') {
+      const item = MENU_ITEMS[selected];
+      if (item.url) {
+        open(item.url);
+        cleanup();
+        process.exit(0);
+      } else {
+        // exit option
+        cleanup();
+        process.exit(0);
+      }
+    }
+  });
+}
+
+main();
