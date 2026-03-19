@@ -3,11 +3,17 @@
   "version": "1.0.0",
   "description": "Personal CLI card for mertuykuseven",
   "main": "index.js",
-  "bin": { "benmertu": "./index.js" },
+  "bin": {
+    "benmertu": "index.js"
+  },
   "license": "MIT",
   "type": "commonjs",
-  "engines": { "node": ">=14" },
-  "files": ["index.js"],
+  "engines": {
+    "node": ">=14"
+  },
+  "files": [
+    "index.js"
+  ],
   "scripts": {
     "test": "node test.js"
   }
