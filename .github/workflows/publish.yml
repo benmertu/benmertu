@@ -21,6 +21,14 @@ jobs:
           fetch-depth: 0
           token: ${{ secrets.GITHUB_TOKEN }}
 
+      - name: Fetch tags and checkout the exact tag
+        run: |
+          git fetch --tags --force
+          git checkout ${{ github.ref_name }}
+
+      - name: Show current version from package.json
+        run: node -p "require('./package.json').version"
+
       - name: Setup Node.js
         uses: actions/setup-node@v6
         with:
