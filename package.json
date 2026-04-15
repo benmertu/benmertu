@@ -1,6 +1,6 @@
 {
   "name": "benmertu",
-  "version": "1.0.14",
+  "version": "1.0.15",
   "description": "Personal CLI card for mertuykuseven",
   "main": "index.js",
   "bin": {
