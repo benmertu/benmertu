@@ -1,7 +1,7 @@
 {
   "name": "benmertu",
-  "version": "1.0.25",
-  "description": "Personal CLI card for mertuykuseven",
+  "version": "1.0.26",
+  "description": "Terminal business card for Mert Uykuseven: run npx benmertu",
   "main": "index.js",
   "bin": {
     "benmertu": "index.js"
